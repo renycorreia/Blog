@@ -1,5 +1,7 @@
 ﻿using Blog.Models.Blog.Autor;
 using Blog.Models.Blog.Categoria;
+using Blog.Models.Blog.Etiqueta;
+using Blog.Models.Blog.Postagem.Revisao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,11 @@ namespace Blog.Models.Blog.Postagem
 {
     public class PostagemEntity
     {
-        public string TituloPost;
-        public AutorEntity AutorPost; //using Blog.Models.Blog.Autor;
-        public CategoriaEntity CategoriaPost; //using Blog.Models.Blog.Categoria;
+        public string tituloPost;
+        public AutorEntity autorPost; //using Blog.Models.Blog.Autor;
+        public CategoriaEntity categoriaPost; //using Blog.Models.Blog.Categoria;
+        public List<EtiquetaEntity> etiquetasPost;
+        public List<RevisaoEntity> revisaoesPost;
          
         public virtual string editar() //virtual: método pode ser sobreescrito por qualquer um que herdar essa classe
         {

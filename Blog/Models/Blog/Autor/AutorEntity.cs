@@ -7,6 +7,6 @@ namespace Blog.Models.Blog.Autor
 {
     public class AutorEntity
     {
-        public string NomeAutor;
+        public string nomeAutor;
     }
 }
