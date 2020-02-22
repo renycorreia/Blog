@@ -1,48 +1,62 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Blog</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Blog</title>
+	<link rel="stylesheet" href="~/estilos/meuEstilo.css"/>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blog</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <!--Cabeçalho-->
+        <div class="container"> <!--esse container usa parte da largura da página-->
+			<div class="row">
+				<div class="col-lg-12">
+					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+						<div class="d-flex flex-grow-1">
+							<span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
+							<a class="navbar-brand" href="#">
+								<h1>Blog</h1>
+							</a>
+						</div>
+						<div class="collapse navbar-collapse flex-grow-1 text-right">
+							<ul class="navbar-nav ml-auto flex-nowrap">
+								<li class="nav-item">
+									<a href="#" class="nav-link">Home</a>
+								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link">Postagens</a>
+								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link">Categoria</a>
+								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link">Sobre</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>	
+        </div>
 
-    <footer class="border-top footer text-muted">
+        <div class="container-fluid"> <!--esse container usa 100% da largura da página-->
+            <div style="background-color:#7A306C;height:100px"> </div> <!--Será subtituído por imagem posteriormente-->
+        </div>
+    </header>
+    <main style="padding-top:20px;"><!--para separar um pouco o corpo do cabeçalho-->
+    <!--Conteúdo principal-->
         <div class="container">
-            &copy; 2020 - Blog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            @RenderBody()
+        </div>
+    </main>
+    <footer>
+    <!--Rodapé-->
+        <div class="container">
+            Rodapé
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
 </body>
 </html>
