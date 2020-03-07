@@ -2,10 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
+@foreach (var postagens in ViewBag.postagens)
+{
+    
+
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Título</h4>
+            <h4 class="card-title">@postagens.TituloPost</h4>
             <p class="card-text">Texto Resumido....</p>
+            <p class="card-text">@postagens.revisoesPost.TextoRevisao</p>
+            <p class="card-text">@postagens.revisoesPost.DataRevisao</p>
             <a href="#" class="btn btn-primary">Read more</a>
         </div>
+
+        @postagens.CategoriaPost.nomeCategoria
+
     </div>
+
+
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Título</h4>
+        <p class="card-text">Texto Resumido....</p>
+        <a href="#" class="btn btn-primary">Read more</a>
+    </div>
+</div>

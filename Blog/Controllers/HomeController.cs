@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Blog.Models;
+using Blog.Models.Blog.Postagem;
+using Microsoft.EntityFrameworkCore;
+using Blog.Models.Blog.Categoria;
 
 namespace Blog.Controllers
 {
@@ -20,6 +23,14 @@ namespace Blog.Controllers
 
         public IActionResult Index()
         {
+            var dbContext = new DatabaseContext();
+
+            //List<PostagemEntity> postagens = dbContext.postagens.ToList();
+            List<PostagemEntity> postagens = dbContext.postagens.Include(p => p.CategoriaPost).Include(p => p.revisaoesPost)
+                .ToList();
+
+            ViewBag.postagens = postagens;
+
             return View();
         }
 

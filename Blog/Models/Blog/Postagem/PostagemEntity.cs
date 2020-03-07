@@ -4,6 +4,7 @@ using Blog.Models.Blog.Etiqueta;
 using Blog.Models.Blog.Postagem.Revisao;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,10 +12,21 @@ namespace Blog.Models.Blog.Postagem
 {
     public class PostagemEntity
     {
-        public string tituloPost;
-        public AutorEntity autorPost;
-        public CategoriaEntity categoriaPost;
-        public List<EtiquetaEntity> etiquetasPost;
-        public List<RevisaoEntity> revisaoesPost;
+        [Key]
+        public int CodPost { get; set; }
+        
+        [MaxLength(120), Required]
+        public string TituloPost { get; set; }
+
+        [Required]
+        public AutorEntity AutorPost { get; set; }
+
+        [Required]
+        public CategoriaEntity CategoriaPost { get; set; }
+
+        
+        //public List<EtiquetaEntity> EtiquetasPost { get; set; }
+
+        public List<RevisaoEntity> revisoesPost { get; set; }
     }
 }

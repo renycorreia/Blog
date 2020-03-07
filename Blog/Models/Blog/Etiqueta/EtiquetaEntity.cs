@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blog.Models.Blog.Postagem;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,5 +17,8 @@ namespace Blog.Models.Blog.Etiqueta
 
         [MaxLength(10), Required]
         public string corTag { get; set; }
+
+        //public List<PostagemEntity> postagemTag { get; set; }
+
     }
 }
