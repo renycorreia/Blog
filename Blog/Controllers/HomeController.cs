@@ -26,7 +26,7 @@ namespace Blog.Controllers
             var dbContext = new DatabaseContext();
 
             //List<PostagemEntity> postagens = dbContext.postagens.ToList();
-            List<PostagemEntity> postagens = dbContext.postagens.Include(p => p.CategoriaPost).Include(p => p.revisaoesPost)
+            List<PostagemEntity> postagens = dbContext.Postagens.Include(p => p.Categoria).Include(p => p.Revisao)
                 .ToList();
 
             ViewBag.postagens = postagens;
