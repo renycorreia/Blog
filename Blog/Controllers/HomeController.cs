@@ -9,6 +9,9 @@ using Blog.Models;
 using Blog.Models.Blog.Postagem;
 using Microsoft.EntityFrameworkCore;
 using Blog.Models.Blog.Categoria;
+using Blog.ViewModels;
+using Blog.Models.Blog.Etiqueta;
+using Blog.Models.Blog.Postagem.Revisao;
 
 namespace Blog.Controllers
 {
@@ -23,19 +26,42 @@ namespace Blog.Controllers
 
         public IActionResult Index()
         {
-            var dbContext = new DatabaseContext();
+            DatabaseContext dbContext = new DatabaseContext();
 
-            //List<PostagemEntity> postagens = dbContext.postagens.ToList();
-            List<PostagemEntity> postagens = dbContext.Postagens.Include(p => p.Categoria).Include(p => p.Revisao)
+            HomeIndexViewModel model = new HomeIndexViewModel();
+
+            List<PostagemEntity> listaPostagens = dbContext.Postagens
+                .Include(p => p.Categoria)
+                .Include(p => p.Revisao)
+                .Include(p => p.Comentario)
                 .ToList();
 
-            ViewBag.postagens = postagens;
+            foreach (PostagemEntity postagem in listaPostagens)
+            {
+                PostagemHomeIndex postagemHomeIndex = new PostagemHomeIndex();
+                postagemHomeIndex.Titulo = postagem.Titulo;
+                //postagemHomeIndex.Descricao = postagem.Descricao; ??? não tem descrição na postagem
+                postagemHomeIndex.Categoria = postagem.Categoria.Nome;
+                postagemHomeIndex.NumeroComentarios = postagem.Comentario.Count.ToString();
+                postagemHomeIndex.PostagemId = postagem.PostagemId.ToString();
 
-            return View();
-        }
+                RevisaoEntity ultimaRevisao = postagem.Revisao.OrderByDescending(o => o.DataCriacao);
+                if (ultimaRevisao !=null)
+                {
+                    //PostagemHomeIndex.Data = ultimaRevisao.DataCriacao
+                }
 
-        public IActionResult Privacy()
-        {
+
+            }
+
+            ViewBag.postagens = listaPostagens;
+
+            List<EtiquetaEntity> listaEtiquetas = dbContext.Etiquetas.ToList();
+            foreach (EtiquetaEntity etiqueta in listaEtiquetas)
+            {
+                Etiqueta 
+            }
+
             return View();
         }
 
