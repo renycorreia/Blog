@@ -11,16 +11,18 @@ namespace Blog.Models.Blog.Postagem.Revisao
     public class RevisaoEntity
     {
         [Key]
-        public int RevisaoId { get; set; }
+        [Column("RevisaoId")]
+        public int Id { get; set; }
 
         [ForeignKey("PostagemId")]
+        [Column("PostagemId")]
         public PostagemEntity Postagem { get; set; }
 
         [Required]
         public string Texto { get; set; }
 
-        public int Versao{ get; set; }
+        public int Versao { get; set; }
 
-        public DateTime Data { get; set; }
+        public DateTime DataCriacao { get; set; }
     }
 }

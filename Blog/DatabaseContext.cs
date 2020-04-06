@@ -3,13 +3,9 @@ using Blog.Models.Blog.Categoria;
 using Blog.Models.Blog.Etiqueta;
 using Blog.Models.Blog.Postagem;
 using Blog.Models.Blog.Postagem.Revisao;
-using Blog.Models.Blog.Postagem.Revisao.Classificacao;
-using Blog.Models.Blog.Postagem.Revisao.Comentario;
+using Blog.Models.Blog.Postagem.Classificacao;
+using Blog.Models.Blog.Postagem.Comentario;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Blog
 {
@@ -41,18 +37,19 @@ namespace Blog
         {
             base.OnModelCreating(modelBuilder);
 
-            //Mapear realacionamentos entre as entidades
+            //Mapear relacionamentos entre as entidades
             //N:N (Postagens / Etiquetas)
+            
             modelBuilder.Entity<PostagemEtiquetaEntity>()
-                .ToTable("PostagemEtiqueta"); //nome da tabela
+                .ToTable("PostagensEtiquetas"); //nome da tabela
 
             modelBuilder.Entity<PostagemEtiquetaEntity>()
                 .HasOne(pe => pe.Postagem)
-                .WithMany(p => p.PostagemEtiqueta);
+                .WithMany(p => p.PostagensEtiquetas);
 
             modelBuilder.Entity<PostagemEtiquetaEntity>()
                 .HasOne(pe => pe.Etiqueta)
-                .WithMany(e => e.PostagemEtiqueta);
+                .WithMany(e => e.PostagensEtiquetas);
         }
     }
 }

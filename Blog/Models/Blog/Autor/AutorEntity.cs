@@ -11,7 +11,8 @@ namespace Blog.Models.Blog.Autor
     public class AutorEntity
     {
         [Key]
-        public int AutorId { get; set; }
+        [Column("AutorId")]
+        public int Id { get; set; }
 
         [MaxLength(100), Required]
         public string Nome { get; set; }

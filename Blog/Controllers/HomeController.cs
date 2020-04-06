@@ -12,57 +12,82 @@ using Blog.Models.Blog.Categoria;
 using Blog.ViewModels;
 using Blog.Models.Blog.Etiqueta;
 using Blog.Models.Blog.Postagem.Revisao;
+using Blog.ViewModels.Home;
 
 namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly CategoriaOrmService _categoriaOrmService;
+        private readonly PostagemOrmService _postagemOrmService;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
+        public HomeController(
+            ILogger<HomeController> logger,
+            CategoriaOrmService categoriaOrmService,
+            PostagemOrmService postagemOrmService
+        ){
             _logger = logger;
+            _categoriaOrmService = categoriaOrmService;
+            _postagemOrmService = postagemOrmService;
         }
 
         public IActionResult Index()
         {
-            DatabaseContext dbContext = new DatabaseContext();
-
+            // Instanciar a ViewModel relativa à action
             HomeIndexViewModel model = new HomeIndexViewModel();
+            model.TituloPagina = "Página Home";
 
-            List<PostagemEntity> listaPostagens = dbContext.Postagens
-                .Include(p => p.Categoria)
-                .Include(p => p.Revisao)
-                .Include(p => p.Comentario)
-                .ToList();
+            List<PostagemEntity> listaPostagens = _postagemOrmService
+            .ObterPostagens();
 
             foreach (PostagemEntity postagem in listaPostagens)
             {
                 PostagemHomeIndex postagemHomeIndex = new PostagemHomeIndex();
                 postagemHomeIndex.Titulo = postagem.Titulo;
-                //postagemHomeIndex.Descricao = postagem.Descricao; ??? não tem descrição na postagem
+                postagemHomeIndex.Descricao = postagem.Descricao;
                 postagemHomeIndex.Categoria = postagem.Categoria.Nome;
-                postagemHomeIndex.NumeroComentarios = postagem.Comentario.Count.ToString();
-                postagemHomeIndex.PostagemId = postagem.PostagemId.ToString();
+                postagemHomeIndex.NumeroComentarios = postagem.Comentarios.Count.ToString();
+                postagemHomeIndex.PostagemId = postagem.Id.ToString();
 
-                RevisaoEntity ultimaRevisao = postagem.Revisao.OrderByDescending(o => o.DataCriacao);
+                // Obter última revisão
+                RevisaoEntity ultimaRevisao = postagem.Revisoes.OrderByDescending(o => o.DataCriacao).FirstOrDefault();
                 if (ultimaRevisao !=null)
                 {
-                    //PostagemHomeIndex.Data = ultimaRevisao.DataCriacao
+                    postagemHomeIndex.Data = ultimaRevisao.DataCriacao.ToLongDateString();
                 }
 
+                model.Postagens.Add(postagemHomeIndex);
+                }
 
-            }
+            // Alimentar a lista de categorias que serão exibidas na view
+            List<CategoriaEntity> listaCategorias = _categoriaOrmService.ObterCategorias();
 
-            ViewBag.postagens = listaPostagens;
-
-            List<EtiquetaEntity> listaEtiquetas = dbContext.Etiquetas.ToList();
-            foreach (EtiquetaEntity etiqueta in listaEtiquetas)
+            foreach (CategoriaEntity categoria in listaCategorias)
             {
-                Etiqueta 
+                CategoriaHomeIndex categoriaHomeIndex = new CategoriaHomeIndex();
+                categoriaHomeIndex.Nome = categoria.Nome;
+                categoriaHomeIndex.CategoriaId = categoria.Id.ToString();
+
+                model.Categorias.Add(categoriaHomeIndex);
+
+                // Alimentar a lista de etiquetas que serão exibidas na view, a partir das etiquetas da categoria
+                foreach (EtiquetaEntity etiqueta in categoria.Etiquetas)
+                {
+                    EtiquetaHomeIndex etiquetaHomeIndex = new EtiquetaHomeIndex();
+                    etiquetaHomeIndex.Nome = etiqueta.Nome;
+                    etiquetaHomeIndex.EtiquetaId = etiqueta.Id.ToString();
+                
+                    model.Etiquetas.Add(etiquetaHomeIndex);
+                }
             }
 
-            return View();
+
+            // Alimentar a lista de postagens populares que serão exibidas na view
+            // TODO Obter lista de postagens populares
+
+            
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

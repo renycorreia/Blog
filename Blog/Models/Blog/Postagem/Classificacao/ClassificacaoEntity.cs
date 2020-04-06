@@ -5,16 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Blog.Models.Blog.Postagem.Revisao.Classificacao
+namespace Blog.Models.Blog.Postagem.Classificacao
 {
     [Table("classificacoes")]
     public class ClassificacaoEntity
     {
         [Key]
-        public int ClassificacaoId { get; set; }
-
-        [ForeignKey("PostagemId")]
-        public PostagemEntity Postagem { get; set; }
+        [Column("ClassificacaoId")]
+        public int Id { get; set; }
+        
+        [Required]
         public bool Classificacao { get; set; }
     }
 }

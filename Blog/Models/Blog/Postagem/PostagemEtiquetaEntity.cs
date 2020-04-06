@@ -12,12 +12,15 @@ namespace Blog.Models.Blog.Postagem
     public class PostagemEtiquetaEntity
     {
         [Key]
-        public int PostagemEtiquetaId { get; set; }
+        [Column("PostagemEtiquetaId")]
+        public int Id { get; set; }
 
         [ForeignKey("PostagemId")]
+        [Column("PostagemId")]
         public PostagemEntity Postagem { get; set; }
 
         [ForeignKey("EtiquetaId")]
+        [Column("EtiquetaId")]
         public EtiquetaEntity Etiqueta { get; set; }
     }
 }

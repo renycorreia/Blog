@@ -1,61 +1,48 @@
-﻿<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - Blog</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/meuEstilo.css" />
-	<link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <!--Cabeçalho-->
-        <div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-						<div class="d-flex flex-grow-1">
-							<a class="navbar-brand" href="#">
-								<h1>Blog</h1>
-							</a>
-						</div>
-						<div class="collapse navbar-collapse flex-grow-1 text-right">
-							<ul class="navbar-nav ml-auto flex-nowrap">
-								<li class="nav-item">
-									<a href="#" class="nav-link">Home</a>
-								</li>
-								<li class="nav-item">
-									<a href="#" class="nav-link">Postagens</a>
-								</li>
-								<li class="nav-item">
-									<a href="#" class="nav-link">Categoria</a>
-								</li>
-								<li class="nav-item">
-									<a href="#" class="nav-link">Sobre</a>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>	
-        </div>
+﻿@using Blog.Models.Blog.Etiqueta
+<!DOCTYPE html>
+<html lang="pt-BR">
+<title>
+    @ViewData["Title"]
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="~/theme/w3schools-blog-theme.css">
+<link rel="stylesheet" href="~/theme/core.css">
 
-        <div class="container-fluid">
-            <div style="background-color:#7A306C;height:100px"> </div>
-        </div>
+<body class="w3-light-grey">
+
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+    <!-- Header -->
+    <header class="w3-container w3-center w3-padding-32">
+        <h1>
+            <b>PWA BLOG</b>
+        </h1>
+        <p>Welcome to the blog of <span class="w3-tag">Reny Correia</span> for the discipline of PWA</p>
     </header>
-    <main style="padding-top:20px;">
-    <!--Conteúdo principal-->
-        <div class="container">
-            @RenderBody()
-        </div>
-    </main>
-    <footer>
-    <!--Rodapé-->
-        <div class="container">
-            Rodapé
-        </div>
-    </footer>
+
+    <!-- Grid -->
+    <div class="w3-row">
+
+        @RenderBody()
+        
+
+        <!-- END GRID -->
+    </div><br>
+
+    <!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+    <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Previous</button>
+    <button class="w3-button w3-black w3-padding-large w3-margin-bottom">Next »</button>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
 </body>
 </html>

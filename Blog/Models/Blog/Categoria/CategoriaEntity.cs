@@ -1,6 +1,7 @@
 ﻿using Blog.Models.Blog.Etiqueta;
 using Blog.Models.Blog.Postagem;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,20 +14,24 @@ namespace Blog.Models.Blog.Categoria
     public class CategoriaEntity
     {
         [Key]
-        public int CategoriaId { get; set; }
+        [Column("CategoriaId")]
+        public int Id { get; set; }
 
         [MaxLength(100), Required]
         public string Nome { get; set; }
 
-        [ForeignKey("PostagemId")]
-        public ICollection<PostagemEntity> Postagens { get; set; }
+        /*[ForeignKey("PostagemId")]
+        [Column("PostagemId")]
+        public ICollection<PostagemEntity> Postagens { get; set; }*/
 
         [ForeignKey("EtiquetaId")]
+        [Column("EtiquetaId")]
         public ICollection<EtiquetaEntity> Etiquetas { get; set; }
 
-        CategoriaEntity()
+
+        public CategoriaEntity()
         {
-            Postagens = new List<PostagemEntity>();
+            //Postagens = new List<PostagemEntity>();
             Etiquetas = new List<EtiquetaEntity>();
         }
 

@@ -2,8 +2,8 @@
 using Blog.Models.Blog.Categoria;
 using Blog.Models.Blog.Etiqueta;
 using Blog.Models.Blog.Postagem.Revisao;
-using Blog.Models.Blog.Postagem.Revisao.Classificacao;
-using Blog.Models.Blog.Postagem.Revisao.Comentario;
+using Blog.Models.Blog.Postagem.Classificacao;
+using Blog.Models.Blog.Postagem.Comentario;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,35 +17,47 @@ namespace Blog.Models.Blog.Postagem
     public class PostagemEntity
     {
         [Key]
-        public int PostagemId { get; set; }
-        
-        [MaxLength(120), Required]
+        [Column("PostagemId")]
+        public int Id { get; set; }
+
+        [MaxLength(120)]
+        [Required]
         public string Titulo { get; set; }
+
+        [MaxLength(640)]
+        [Required]
+        public string Descricao { get; set; }
 
         [Required]
         public AutorEntity Autor { get; set; }
 
         [Required]
+        [Column("CategoriaId")]
         public CategoriaEntity Categoria { get; set; }
 
         [ForeignKey("PostagemEtiquetaId")]
-        public List<PostagemEtiquetaEntity> PostagemEtiqueta { get; set; }
+        [Column("PostagemEtiquetaId")]
+        public List<PostagemEtiquetaEntity> PostagensEtiquetas { get; set; }
 
         [ForeignKey("RevisaoId")]
-        public ICollection<RevisaoEntity> Revisao { get; set; }
+        [Column("RevisaoId")]
+        public ICollection<RevisaoEntity> Revisoes { get; set; }
 
         [ForeignKey("ComentarioId")]
-        public ICollection<ComentarioEntity> Comentario { get; set; }
+        [Column("ComentarioId")]
+        public ICollection<ComentarioEntity> Comentarios { get; set; }
 
         [ForeignKey("ClassificacaoId")]
-        public ICollection<ClassificacaoEntity> Classificacao { get; set; }
+        [Column("ClassificacaoId")]
+        public ICollection<ClassificacaoEntity> Classificacoes { get; set; }
 
         public PostagemEntity()
         {
-            PostagemEtiqueta = new List<PostagemEtiquetaEntity>();
-            Revisao = new List<RevisaoEntity>();
-            Comentario = new List<ComentarioEntity>();
-            Classificacao = new List<ClassificacaoEntity>();
+            Categoria = new CategoriaEntity();
+            PostagensEtiquetas = new List<PostagemEtiquetaEntity>();
+            Revisoes = new List<RevisaoEntity>();
+            Comentarios = new List<ComentarioEntity>();
+            Classificacoes = new List<ClassificacaoEntity>();
         }
     }
 }

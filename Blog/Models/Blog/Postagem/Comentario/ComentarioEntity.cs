@@ -5,23 +5,29 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Blog.Models.Blog.Postagem.Revisao.Comentario
+namespace Blog.Models.Blog.Postagem.Comentario
 {
     [Table("comentarios")]
     public class ComentarioEntity
     {
         [Key]
-        public int ComentarioId { get; set; }
+        [Column("ComentarioId")]
+        public int Id { get; set; }
 
         [ForeignKey("PostagemId")]
+        [Column("PostagemId")]
         public PostagemEntity Postagem { get; set; }
 
-        public DateTime Data { get; set; }
-
-        public string NomeAutor { get; set; }
-
-        public string EmailAutor { get; set; }
-
+        [Required]
         public string Texto { get; set; }
+
+        [MaxLength(128)]
+        [Required]
+        public string Autor { get; set; }
+
+        [Required]
+        public DateTime DataCriacao { get; set; }
+
+        public ComentarioEntity ComentarioPai { get; set; }
     }
 }

@@ -13,7 +13,8 @@ namespace Blog.Models.Blog.Etiqueta
     public class EtiquetaEntity
     {
         [Key]
-        public int EtiquetaId { get; set; }
+        [Column("EtiquetaId")]
+        public int Id { get; set; }
 
         [MaxLength(10), Required]
         public string Nome { get; set; }
@@ -22,14 +23,16 @@ namespace Blog.Models.Blog.Etiqueta
         public string Cor { get; set; }
 
         [ForeignKey("PostagemEtiquetaId")]
-        public List<PostagemEtiquetaEntity> PostagemEtiqueta { get; set; }
+		[Column("PostagemEtiquetaId")]
+        public List<PostagemEtiquetaEntity> PostagensEtiquetas { get; set; }
 
         [ForeignKey("CategoriaId")]
+		[Column("CategoriaId")]
         public CategoriaEntity Categoria { get; set; }
 
         public EtiquetaEntity()
         {
-            PostagemEtiqueta = new List<PostagemEtiquetaEntity>();
+            PostagensEtiquetas = new List<PostagemEtiquetaEntity>();
         }
 
     }

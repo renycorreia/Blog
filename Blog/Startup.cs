@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Blog.Models.Blog.Categoria;
+using Blog.Models.Blog.Postagem;
 
 namespace Blog
 {
@@ -23,11 +25,19 @@ namespace Blog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            using (var dbContext = new DatabaseContext())
+            using (var databaseContext = new DatabaseContext())
             {
-                dbContext.Database.EnsureCreated();
+                databaseContext.Database.EnsureCreated();
             }
 
+            // Adicionar o serviço do banco de dados
+            services.AddDbContext<DatabaseContext>();
+
+            // Adicionar os serviços de ORM das entidades do domínio
+            services.AddTransient<CategoriaOrmService>();
+            services.AddTransient<PostagemOrmService>();
+
+            // Adicionar os serviços que possibilitam o funcionamento dos controllers e das views
             services.AddControllersWithViews();
         }
 
