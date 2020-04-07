@@ -18,10 +18,20 @@ namespace Blog.Models.Blog.Postagem
             return _databaseContext.Postagens
                 .Include(p => p.Autor)
                 .Include(p => p.PostagensEtiquetas)
+                .Include(p => p.Categoria)
                 //.Include(p => p.Revisoes)
                 .Include(p => p.Comentarios)
                 .Include(p => p.Classificacoes)
                 .ToList();
         }
+
+        public List<PostagemEntity> ObterPostagensPopulares()
+        {
+            return _databaseContext.Postagens
+                .Include(p => p.Comentarios)
+                .OrderByDescending(p => p.Comentarios.Count).Take(4)
+                .ToList();
+        }
+        
     }
 }

@@ -20,9 +20,8 @@ namespace Blog.Models.Blog.Categoria
         [MaxLength(100), Required]
         public string Nome { get; set; }
 
-        /*[ForeignKey("PostagemId")]
         [Column("PostagemId")]
-        public ICollection<PostagemEntity> Postagens { get; set; }*/
+        public ICollection<PostagemEntity> Postagens { get; set; }
 
         [ForeignKey("EtiquetaId")]
         [Column("EtiquetaId")]

@@ -24,7 +24,7 @@ namespace Blog.Models.Blog.Postagem
         [Required]
         public string Titulo { get; set; }
 
-        [MaxLength(640)]
+        [Column(TypeName = "text")]
         [Required]
         public string Descricao { get; set; }
 
@@ -35,19 +35,15 @@ namespace Blog.Models.Blog.Postagem
         [Column("CategoriaId")]
         public CategoriaEntity Categoria { get; set; }
 
-        [ForeignKey("PostagemEtiquetaId")]
         [Column("PostagemEtiquetaId")]
         public List<PostagemEtiquetaEntity> PostagensEtiquetas { get; set; }
 
-        [ForeignKey("RevisaoId")]
         [Column("RevisaoId")]
         public ICollection<RevisaoEntity> Revisoes { get; set; }
 
-        [ForeignKey("ComentarioId")]
         [Column("ComentarioId")]
         public ICollection<ComentarioEntity> Comentarios { get; set; }
 
-        [ForeignKey("ClassificacaoId")]
         [Column("ClassificacaoId")]
         public ICollection<ClassificacaoEntity> Classificacoes { get; set; }
 

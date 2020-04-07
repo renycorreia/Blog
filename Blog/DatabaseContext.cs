@@ -25,6 +25,7 @@ namespace Blog
 
         public DbSet<ClassificacaoEntity> Classificacoes { get; set; }
 
+        public DbSet<PostagemEtiquetaEntity> PostagensEtiquetas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

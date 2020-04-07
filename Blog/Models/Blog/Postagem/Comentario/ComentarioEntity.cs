@@ -14,7 +14,6 @@ namespace Blog.Models.Blog.Postagem.Comentario
         [Column("ComentarioId")]
         public int Id { get; set; }
 
-        [ForeignKey("PostagemId")]
         [Column("PostagemId")]
         public PostagemEntity Postagem { get; set; }
 

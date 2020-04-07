@@ -10,6 +10,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Blog.Models.Blog.Categoria;
 using Blog.Models.Blog.Postagem;
+using Blog.Models.Blog.Postagem.Revisao;
+using Blog.Models.Blog.Autor;
+using Blog.Models.Blog.Etiqueta;
+using Blog.Models.Blog.Postagem.Classificacao;
+using Blog.Models.Blog.Postagem.Comentario;
 
 namespace Blog
 {
@@ -36,6 +41,12 @@ namespace Blog
             // Adicionar os serviços de ORM das entidades do domínio
             services.AddTransient<CategoriaOrmService>();
             services.AddTransient<PostagemOrmService>();
+            services.AddTransient<AutorOrmService>();
+            services.AddTransient<EtiquetaOrmService>();
+            services.AddTransient<ClassificacaoOrmService>();
+            services.AddTransient<ComentarioOrmService>();
+            services.AddTransient<RevisaoOrmService>();
+            services.AddTransient<PostagemEtiquetaOrmService>();
 
             // Adicionar os serviços que possibilitam o funcionamento dos controllers e das views
             services.AddControllersWithViews();

@@ -13,6 +13,9 @@ using Blog.ViewModels;
 using Blog.Models.Blog.Etiqueta;
 using Blog.Models.Blog.Postagem.Revisao;
 using Blog.ViewModels.Home;
+using Blog.Models.Blog.Autor;
+using Blog.Models.Blog.Postagem.Classificacao;
+using Blog.Models.Blog.Postagem.Comentario;
 
 namespace Blog.Controllers
 {
@@ -21,15 +24,34 @@ namespace Blog.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly CategoriaOrmService _categoriaOrmService;
         private readonly PostagemOrmService _postagemOrmService;
+        private readonly AutorOrmService _autorOrmService;
+        private readonly EtiquetaOrmService _etiquetaOrmService;
+        private readonly ClassificacaoOrmService _classificacaoOrmService;
+        private readonly ComentarioOrmService _comentarioOrmService;
+        private readonly RevisaoOrmService _revisaoOrmService;
+        private readonly PostagemEtiquetaOrmService _postagemEtiquetaOrmService;
 
         public HomeController(
-            ILogger<HomeController> logger,
-            CategoriaOrmService categoriaOrmService,
-            PostagemOrmService postagemOrmService
+            ILogger<HomeController> logger
+            , CategoriaOrmService categoriaOrmService
+            , PostagemOrmService postagemOrmService
+            , AutorOrmService autorOrmService
+            , EtiquetaOrmService etiquetaOrmService
+            , ClassificacaoOrmService classificacaoOrmService
+            , ComentarioOrmService comentarioOrmService
+            , RevisaoOrmService revisaoOrmService
+            , PostagemEtiquetaOrmService postagemEtiquetaOrmService
+
         ){
             _logger = logger;
             _categoriaOrmService = categoriaOrmService;
             _postagemOrmService = postagemOrmService;
+            _autorOrmService = autorOrmService;
+            _etiquetaOrmService = etiquetaOrmService;
+            _classificacaoOrmService = classificacaoOrmService;
+            _comentarioOrmService = comentarioOrmService;
+            _revisaoOrmService = revisaoOrmService;
+            _postagemEtiquetaOrmService = postagemEtiquetaOrmService;
         }
 
         public IActionResult Index()
@@ -38,8 +60,7 @@ namespace Blog.Controllers
             HomeIndexViewModel model = new HomeIndexViewModel();
             model.TituloPagina = "Página Home";
 
-            List<PostagemEntity> listaPostagens = _postagemOrmService
-            .ObterPostagens();
+            List<PostagemEntity> listaPostagens = _postagemOrmService.ObterPostagens();
 
             foreach (PostagemEntity postagem in listaPostagens)
             {
@@ -85,6 +106,19 @@ namespace Blog.Controllers
 
             // Alimentar a lista de postagens populares que serão exibidas na view
             // TODO Obter lista de postagens populares
+
+             List<PostagemEntity> listaPostagensPopulaes = _postagemOrmService.ObterPostagensPopulares();
+
+            foreach (PostagemEntity postagemPopular in listaPostagensPopulaes)
+            {
+                PostagemPopularHomeIndex postagemPopularHomeIndex = new PostagemPopularHomeIndex();
+
+                postagemPopularHomeIndex.Titulo = postagemPopular.Titulo;
+                postagemPopularHomeIndex.PostagemId = postagemPopular.Id.ToString();
+                postagemPopularHomeIndex.Categoria = postagemPopular.Categoria.Nome;
+
+                model.PostagensPopulares.Add(postagemPopularHomeIndex);
+            }
 
             
             return View(model);
