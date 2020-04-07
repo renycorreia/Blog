@@ -16,23 +16,6 @@ namespace Blog.Models.Blog.Postagem.Classificacao
 
         public List<ClassificacaoEntity> ObterClassificacoes()
         {
-            var primeiraClassificacaoOuNulo = _databaseContext.Classificacoes.FirstOrDefault();
-
-            var algumaClassificacaoOuNulo = _databaseContext.Classificacoes.SingleOrDefault(c => c.Id == 3);
-
-            var encontrarClassificacao = _databaseContext.Classificacoes.Find(3);
-
-            var todasclassificacoes = _databaseContext.Classificacoes.ToList();
-
-            var classificacoesESuasclassificacoes = _databaseContext.Classificacoes
-                .ToList();
-
-            var classificacoesSemclassificacoes = _databaseContext.Classificacoes
-                .ToList();
-
-            var classificacoesComclassificacoes = _databaseContext.Classificacoes
-                .ToList();
-
             return _databaseContext.Classificacoes
                 .ToList();
         }

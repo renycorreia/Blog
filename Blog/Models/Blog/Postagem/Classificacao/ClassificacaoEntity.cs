@@ -16,5 +16,8 @@ namespace Blog.Models.Blog.Postagem.Classificacao
         
         [Required]
         public bool Classificacao { get; set; }
+
+        [Column("PostagemId")]
+        public PostagemEntity Postagem { get; set; }
     }
 }

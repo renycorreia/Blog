@@ -20,17 +20,14 @@ namespace Blog.Models.Blog.Categoria
         [MaxLength(100), Required]
         public string Nome { get; set; }
 
-        [Column("PostagemId")]
         public ICollection<PostagemEntity> Postagens { get; set; }
 
-        [ForeignKey("EtiquetaId")]
-        [Column("EtiquetaId")]
         public ICollection<EtiquetaEntity> Etiquetas { get; set; }
 
 
         public CategoriaEntity()
         {
-            //Postagens = new List<PostagemEntity>();
+            Postagens = new List<PostagemEntity>();
             Etiquetas = new List<EtiquetaEntity>();
         }
 

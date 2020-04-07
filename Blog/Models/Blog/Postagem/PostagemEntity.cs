@@ -41,10 +41,8 @@ namespace Blog.Models.Blog.Postagem
         [Column("RevisaoId")]
         public ICollection<RevisaoEntity> Revisoes { get; set; }
 
-        [Column("ComentarioId")]
         public ICollection<ComentarioEntity> Comentarios { get; set; }
 
-        [Column("ClassificacaoId")]
         public ICollection<ClassificacaoEntity> Classificacoes { get; set; }
 
         public PostagemEntity()

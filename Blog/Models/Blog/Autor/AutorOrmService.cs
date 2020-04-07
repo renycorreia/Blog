@@ -16,31 +16,6 @@ namespace Blog.Models.Blog.Autor
 
         public List<AutorEntity> ObterAutores()
         {
-            var primeiraAutorOuNulo = _databaseContext.Autores.FirstOrDefault();
-
-            var algumaAutorOuNulo = _databaseContext.Autores.SingleOrDefault(c => c.Id == 3);
-
-            var encontrarAutor = _databaseContext.Autores.Find(3);
-
-            var todasautores = _databaseContext.Autores.ToList();
-
-            var autoresComALetraG = _databaseContext.Autores.Where(c => c.Nome.StartsWith("G")).ToList();
-            var autoresComALetraMouL = _databaseContext.Autores
-                .Where(c => c.Nome.StartsWith("M") || c.Nome.StartsWith("L"))
-                .ToList();
-
-            var autoresEmOrdemAlfabetica = _databaseContext.Autores.OrderBy(c => c.Nome).ToList();
-            var autoresEmOrdemAlfabeticaInversa = _databaseContext.Autores.OrderByDescending(c => c.Nome).ToList();
-
-            var autoresESuasautores = _databaseContext.Autores
-                .ToList();
-
-            var autoresSemautores = _databaseContext.Autores
-                .ToList();
-
-            var autoresComautores = _databaseContext.Autores
-                .ToList();
-
             return _databaseContext.Autores
                 .ToList();
         }

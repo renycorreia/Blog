@@ -22,11 +22,9 @@ namespace Blog.Models.Blog.Etiqueta
         [MaxLength(10), Required]
         public string Cor { get; set; }
 
-        [ForeignKey("PostagemEtiquetaId")]
 		[Column("PostagemEtiquetaId")]
         public List<PostagemEtiquetaEntity> PostagensEtiquetas { get; set; }
 
-        [ForeignKey("CategoriaId")]
 		[Column("CategoriaId")]
         public CategoriaEntity Categoria { get; set; }
 
