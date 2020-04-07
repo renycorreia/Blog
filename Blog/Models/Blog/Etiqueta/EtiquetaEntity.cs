@@ -19,9 +19,6 @@ namespace Blog.Models.Blog.Etiqueta
         [MaxLength(10), Required]
         public string Nome { get; set; }
 
-        [MaxLength(10), Required]
-        public string Cor { get; set; }
-
 		[Column("PostagemEtiquetaId")]
         public List<PostagemEtiquetaEntity> PostagensEtiquetas { get; set; }
 

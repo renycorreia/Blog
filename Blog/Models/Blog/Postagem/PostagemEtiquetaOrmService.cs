@@ -16,11 +16,8 @@ namespace Blog.Models.Blog.Postagem
         public List<PostagemEtiquetaEntity> ObterPostagemEtiqueta()
         {
             return _databaseContext.PostagensEtiquetas
-                //.Include(p => p.Autor)
-                //.Include(p => p.PostagensEtiquetas)
-                //.Include(p => p.Revisoes)
-                //.Include(p => p.Comentarios)
-                //.Include(p => p.Classificacoes)
+                .Include(p => p.Postagem)
+                .Include(p => p.Etiqueta)
                 .ToList();
         }
     }

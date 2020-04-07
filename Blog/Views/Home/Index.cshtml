@@ -17,9 +17,9 @@
                 <h2>
                     <b>@postagem.Titulo</b>
                 </h2>
-                <h5>
-                    @postagem.Categoria <span class="w3-opacity">@postagem.Data</span>
-                </h5>
+                <h6>
+                    @postagem.Categoria <span class="w3-opacity"> || @postagem.Data</span>
+                </h6>
             </div>
 
             <div class="w3-container">
@@ -87,7 +87,7 @@
             @foreach (PostagemPopularHomeIndex postagemPopular in @Model.PostagensPopulares)
             {
                 <li class="w3-padding-16">
-                    <img src="https://via.placeholder.com/75/BBC9E3" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                    <img src="https://via.placeholder.com/80" alt="Image" class="w3-left w3-margin-right" style="width:50px">
                     <span class="w3-large">@postagemPopular.Titulo</span><br>
                     <span>Sed mattis nunc</span> <!--Primeiras palavras da descrição-->
                 </li>

@@ -19,7 +19,7 @@ namespace Blog.Models.Blog.Postagem
                 .Include(p => p.Autor)
                 .Include(p => p.PostagensEtiquetas)
                 .Include(p => p.Categoria)
-                //.Include(p => p.Revisoes)
+                .Include(p => p.Revisoes)
                 .Include(p => p.Comentarios)
                 .Include(p => p.Classificacoes)
                 .ToList();
