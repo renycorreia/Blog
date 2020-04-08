@@ -79,7 +79,7 @@ namespace Blog.Controllers
                 }
 
                 model.Postagens.Add(postagemHomeIndex);
-                }
+            }
 
             // Alimentar a lista de categorias que serão exibidas na view
             List<CategoriaEntity> listaCategorias = _categoriaOrmService.ObterCategorias();
@@ -113,7 +113,7 @@ namespace Blog.Controllers
             {
                 PostagemPopularHomeIndex postagemPopularHomeIndex = new PostagemPopularHomeIndex();
 
-                postagemPopularHomeIndex.Titulo = postagemPopular.Titulo;
+                postagemPopularHomeIndex.Titulo = postagemPopular.Titulo.Substring(0, 18)+"...";
                 postagemPopularHomeIndex.PostagemId = postagemPopular.Id.ToString();
                 postagemPopularHomeIndex.Categoria = postagemPopular.Categoria.Nome;
 

@@ -35,8 +35,7 @@
                     <div class="w3-col m4 w3-hide-small">
                         <p>
                             <span class="w3-padding-large w3-right">
-                                <b>Comentários </b> <span class="w3-tag">@postagem.NumeroComentarios</span>
-                                <!--<b>Comments </b> <span class="w3-badge">2</span>-->
+                                <b>Comentários </b> <span class="@(postagem.NumeroComentarios.Equals("0") ? "w3-badge" : "w3-tag")">@postagem.NumeroComentarios</span>
                             </span>
                         </p>
                     </div>
@@ -89,7 +88,7 @@
                 <li class="w3-padding-16">
                     <img src="https://via.placeholder.com/80" alt="Image" class="w3-left w3-margin-right" style="width:50px">
                     <span class="w3-large">@postagemPopular.Titulo</span><br>
-                    <span>Sed mattis nunc</span> <!--Primeiras palavras da descrição-->
+                    <span>@postagemPopular.Categoria</span> 
                 </li>
             }
                 

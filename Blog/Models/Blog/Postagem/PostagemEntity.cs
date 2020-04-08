@@ -47,7 +47,6 @@ namespace Blog.Models.Blog.Postagem
 
         public PostagemEntity()
         {
-            Categoria = new CategoriaEntity();
             PostagensEtiquetas = new List<PostagemEtiquetaEntity>();
             Revisoes = new List<RevisaoEntity>();
             Comentarios = new List<ComentarioEntity>();
