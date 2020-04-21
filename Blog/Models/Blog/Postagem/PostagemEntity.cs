@@ -28,6 +28,8 @@ namespace Blog.Models.Blog.Postagem
         [Required]
         public string Descricao { get; set; }
 
+        public DateTime ExibirAPartirDe { get; set; }
+
         [Required]
         public AutorEntity Autor { get; set; }
 
