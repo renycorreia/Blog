@@ -72,11 +72,47 @@ namespace Blog
 
             app.UseAuthorization();
 
+            //Mapeamento das rotas
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
+                /*endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                    */
+
+                //Visitantes
+                endpoints.MapControllerRoute(
+                    name: "comum",
+                    pattern: "/",
+                    defaults: new { controller = "Home", action = "Index"});
+
+                endpoints.MapControllerRoute(
+                    name: "comentarios",
+                    pattern: "comentarios/{action}/{id?}",
+                    defaults: new { controller = "Comentarios", action = "Listar" });
+
+                //Administradores
+                endpoints.MapControllerRoute(
+                    name: "admin.categorias",
+                    pattern: "admin/categorias/{action}/{id?}",
+                    defaults: new { controller = "AdminCategorias", action = "Listar"}
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "admin.autores",
+                    pattern: "admin/autores/{action}/{id?}",
+                    defaults: new { controller = "AdminAutores", action = "Listar" });
+
+                endpoints.MapControllerRoute(
+                    name: "admin.etiquetas",
+                    pattern: "admin/etiquetas/{action}/{id?}",
+                    defaults: new { controller = "AdminEtiquetas", action = "Listar" });
+
+                endpoints.MapControllerRoute(
+                    name: "admin.postagens",
+                    pattern: "admin/postagens/{action}/{id?}",
+                    defaults: new { controller = "AdminPostagens", action = "Listar" });
+
             });
         }
     }

@@ -32,5 +32,49 @@ namespace Blog.Models.Blog.Postagem.Revisao
             return _databaseContext.Revisoes.Where(c => c.Texto.Contains(textoRevisao)).ToList();
 
         }
+
+        public RevisaoEntity CriarRevisao(string texto, int versao, PostagemEntity postagem, DateTime dataCriacao)
+        {
+
+            var novaRevisao = new RevisaoEntity { Postagem = postagem, Texto = texto, Versao = versao, DataCriacao = dataCriacao };
+
+            _databaseContext.Revisoes.Add(novaRevisao);
+            _databaseContext.SaveChanges();
+
+            return novaRevisao;
+        }
+
+        public RevisaoEntity EditarRevisao(int id, string texto, int versao, PostagemEntity postagem, DateTime dataCriacao)
+        {
+            var Revisao = _databaseContext.Revisoes.Find(id);
+
+            if (Revisao == null)
+            {
+                throw new Exception("Revisao não encontrada!");
+            }
+
+            Revisao.Postagem = postagem;
+            Revisao.Texto = texto;
+            Revisao.Versao = versao;
+            Revisao.DataCriacao = dataCriacao;
+            _databaseContext.SaveChanges();
+
+            return Revisao;
+        }
+
+        public bool RemoverRevisao(int id)
+        {
+            var Revisao = _databaseContext.Revisoes.Find(id);
+
+            if (Revisao == null)
+            {
+                throw new Exception("Revisao não encontrada!");
+            }
+
+            _databaseContext.Revisoes.Remove(Revisao);
+            _databaseContext.SaveChanges();
+
+            return true;
+        }
     }
 }
