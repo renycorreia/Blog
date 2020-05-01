@@ -11,6 +11,8 @@ namespace Blog.RequestModels.AdminPostagens
 
         public string Descricao { get; set; }
 
+        public int Versao { get; set; }
+
         public int IdAutor { get; set; }
 
         public int IdCategoria { get; set; }

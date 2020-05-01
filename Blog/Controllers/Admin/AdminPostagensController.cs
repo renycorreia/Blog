@@ -52,6 +52,7 @@ namespace Blog.Controllers.Admin
             var idAutor = request.IdAutor;
             var idCategoria = request.IdCategoria;
             var exibirAPartirDe = request.ExibirAPartirDe;
+            var versao = request.Versao;
 
             var autor = _autorOrmService.ObterAutorPorId(idAutor);
             var categoria = _categoriaOrmService.ObterCategoriaPorId(idCategoria);
@@ -60,7 +61,7 @@ namespace Blog.Controllers.Admin
             {
                 var postagem = _postagemOrmService.CriarPostagem(titulo, descricao, autor, categoria, exibirAPartirDe);
 
-                _revisaoOrmService.CriarRevisao(descricao, 1, postagem, DateTime.Now);
+                _revisaoOrmService.CriarRevisao(descricao, versao, postagem, DateTime.Now);
             }
             catch (Exception e)
             {
@@ -95,7 +96,9 @@ namespace Blog.Controllers.Admin
 
             try
             {
-                _postagemOrmService.EditarPostagem(id, titulo, descricao, autor, categoria, exibirAPartirDe);
+                var postagem = _postagemOrmService.EditarPostagem(id, titulo, descricao, autor, categoria, exibirAPartirDe);
+
+                _revisaoOrmService.CriarRevisao(descricao, 1, postagem, DateTime.Now);
             }
             catch (Exception e)
             {
@@ -120,9 +123,11 @@ namespace Blog.Controllers.Admin
         public RedirectToActionResult Remover(AdminPostagensRemoverRequestModel request)
         {
             var id = request.Id;
+            var numRevisoes = _revisaoOrmService.ObterRevisoesPorPostagem(id).Count;
 
             try
             {
+                _revisaoOrmService.RemoverRevisoesPorPostagem(id);
                 _postagemOrmService.RemoverPostagem(id);
             }
             catch (Exception e)

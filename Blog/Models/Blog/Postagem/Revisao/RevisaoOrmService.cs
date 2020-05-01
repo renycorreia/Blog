@@ -27,6 +27,18 @@ namespace Blog.Models.Blog.Postagem.Revisao
             return revisao;
         }
 
+        public List<RevisaoEntity> ObterRevisoesPorPostagem(int idPostagem)
+        {
+            var postagem = new PostagemEntity();
+            postagem.Id = idPostagem;
+
+            var listaRevisao = _databaseContext.Revisoes
+                .Where(r => r.Postagem == postagem)
+                .ToList();
+
+            return listaRevisao;
+        }
+
         public List<RevisaoEntity> PesquisarrevisoesPorTexto(string textoRevisao)
         {
             return _databaseContext.Revisoes.Where(c => c.Texto.Contains(textoRevisao)).ToList();
@@ -76,5 +88,30 @@ namespace Blog.Models.Blog.Postagem.Revisao
 
             return true;
         }
+
+        public bool RemoverRevisoesPorPostagem(int idPostagem)
+        {
+            var postagem = new PostagemEntity();
+            postagem.Id = idPostagem;
+
+            var listaRevisao = _databaseContext.Revisoes
+                .Where(r => r.Postagem == postagem)
+                .ToList();
+
+            foreach (var revisao in listaRevisao)
+            {
+                if (revisao == null)
+                {
+                    throw new Exception("Revisao não encontrada!");
+                }
+
+                _databaseContext.Revisoes.Remove(revisao);
+            }
+
+            _databaseContext.SaveChanges();
+
+            return true;
+        }
+
     }
 }

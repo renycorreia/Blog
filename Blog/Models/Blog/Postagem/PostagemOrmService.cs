@@ -27,6 +27,7 @@ namespace Blog.Models.Blog.Postagem
                 .Include(cm => cm.Comentarios)
                 .Include(cl => cl.Classificacoes)
                 .Where(p => p.ExibirAPartirDe <= DateTime.Now)
+                .OrderByDescending(p => p.ExibirAPartirDe)
                 .ToList();
         }
 
